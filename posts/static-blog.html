@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>零依赖静态博客：这个站是怎么搭起来的 · 拾光</title>
+    <meta name="description" content="三个 HTML 页面、一个 CSS 文件、一个 60 行的 JS，没有任何构建步骤。上传就是发布。" />
+    <meta name="theme-color" content="#fbf9f5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#161513" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="零依赖静态博客：这个站是怎么搭起来的" />
+    <meta property="og:description" content="三个 HTML 页面、一个 CSS 文件、一个 60 行的 JS，没有任何构建步骤。上传就是发布。" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("shiguang-theme");
+          if (t === "light" || t === "dark") {
+            document.documentElement.setAttribute("data-theme", t);
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../assets/style.css" />
+  </head>
+
+  <body>
+    <a class="skip" href="#main">跳到正文</a>
+    <div class="progress" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="../index.html">拾光</a>
+        <nav class="site-nav" aria-label="主导航">
+          <a href="../index.html">文章</a>
+          <a href="../about.html">关于</a>
+          <button class="theme-toggle" type="button" aria-label="切换深浅色">☾</button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <article class="article">
+        <div class="wrap">
+          <a class="back" href="../index.html">← 返回文章列表</a>
+
+          <header>
+            <div class="post-meta">
+              <time datetime="2026-10-05">2026 年 10 月 5 日</time>
+              <span class="dot">·</span>
+              <span>技术</span>
+              <span class="dot">·</span>
+              <span>8 分钟</span>
+            </div>
+            <h1>零依赖静态博客：这个站是怎么搭起来的</h1>
+          </header>
+
+          <div class="prose">
+            <p>
+              这个博客没有用 WordPress，也没有用 Hexo、Hugo、Next.js。
+              它就是一个文件夹，里面放着手写的 HTML。你现在看到的这一页，就是一个普通文本文件。
+            </p>
+
+            <h2>目录结构</h2>
+
+            <pre><code>my-blog/
+├── index.html          首页：简介 + 文章列表
+├── about.html          关于页
+├── 404.html            找不到页面时显示
+├── posts/
+│   ├── hello-world.html
+│   ├── static-blog.html
+│   └── reading-2026.html
+└── assets/
+    ├── style.css       全站样式（一个文件）
+    ├── app.js          深浅色切换 + 阅读进度条
+    └── favicon.svg     标签页小图标</code></pre>
+
+            <p>没有 <code>package.json</code>，没有 <code>node_modules</code>，没有编译产物。双击 <code>index.html</code> 就能在本地看。</p>
+
+            <h2>为什么不用框架</h2>
+
+            <p>理由按重要性排序：</p>
+
+            <ol>
+              <li>
+                <strong>不会烂。</strong>框架三年一换，HTML 和 CSS 三十年没换过。
+                一个纯静态站放五年，打开还是这个样子；一个 Next.js 项目放五年，<code>npm install</code> 可能已经跑不起来了。
+              </li>
+              <li>
+                <strong>发布成本为零。</strong>上传文件就是发布，不需要在服务器上装运行时、跑构建。
+              </li>
+              <li>
+                <strong>托管免费。</strong>因为全是静态文件，Cloudflare Pages、GitHub Pages 都能白嫖，还带全球 CDN 和自动 HTTPS。
+              </li>
+            </ol>
+
+            <p>
+              代价是：文章多了以后，首页列表要手动维护。一百篇以内，这点手工活完全可以接受；
+              真到了一百篇以上，再考虑引入一个静态站点生成器也不迟。
+            </p>
+
+            <h2>样式是怎么组织的</h2>
+
+            <p>
+              所有颜色都抽成了 CSS 变量，改上面十几行就能换掉整站配色，不用在几百条规则里翻找：
+            </p>
+
+            <pre><code>:root {
+  --bg: #fbf9f5;
+  --text: #1d1b18;
+  --accent: #b0532c;
+}
+
+[data-theme="dark"] {
+  --bg: #161513;
+  --text: #e9e4da;
+  --accent: #e08d61;
+}</code></pre>
+
+            <p>
+              深色模式有两套触发方式：用户点右上角的按钮会写进 <code>localStorage</code>；
+              没点过的话就跟随系统的 <code>prefers-color-scheme</code>。
+              为了避免深色模式下加载时闪一下白屏，那段读取主题的脚本被放在 <code>&lt;link rel="stylesheet"&gt;</code> 之前。
+            </p>
+
+            <h2>发布到公网</h2>
+
+            <p>以 Cloudflare Pages 为例，全程免费：</p>
+
+            <ol>
+              <li>把 <code>my-blog</code> 文件夹推到一个 GitHub 仓库。</li>
+              <li>Cloudflare 控制台 → Workers &amp; Pages → Create → Pages → 连接这个仓库。</li>
+              <li>Build command 留空，Build output directory 填 <code>/</code>。</li>
+              <li>点 Save and Deploy，一分钟后就有一个 <code>xxx.pages.dev</code> 的网址。</li>
+            </ol>
+
+            <p>
+              之后每次 <code>git push</code>，Cloudflare 会自动重新部署。
+              想换成自己的域名，在 Pages 项目里加 Custom domain，再按提示改一下 DNS 就完成了。
+            </p>
+
+            <blockquote>
+              <p>先让它上线，再让它变好。一个丑但在线的站，比一个漂亮但躺在本地硬盘里的站有价值。</p>
+            </blockquote>
+          </div>
+
+          <footer class="article-footer">
+            <p>这是一篇示例文章，用来展示代码块、列表、引用等排版效果。可以删掉或改成你自己的内容。</p>
+            <p><a href="../index.html">← 回到全部文章</a></p>
+          </footer>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <span>© 2026 阿舟</span>
+        <span>用 HTML 和 CSS 手写的静态站</span>
+      </div>
+    </footer>
+
+    <script src="../assets/app.js"></script>
+  </body>
+</html>

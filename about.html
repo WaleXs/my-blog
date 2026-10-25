@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>关于 · 拾光</title>
+    <meta name="description" content="关于这个博客和它的作者。" />
+    <meta name="theme-color" content="#fbf9f5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#161513" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("shiguang-theme");
+          if (t === "light" || t === "dark") {
+            document.documentElement.setAttribute("data-theme", t);
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+
+  <body>
+    <a class="skip" href="#main">跳到正文</a>
+
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="index.html">拾光</a>
+        <nav class="site-nav" aria-label="主导航">
+          <a href="index.html">文章</a>
+          <a href="about.html" aria-current="page">关于</a>
+          <button class="theme-toggle" type="button" aria-label="切换深浅色">☾</button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="page">
+        <div class="wrap">
+          <!-- ✏️ 这一整页都是占位内容，换成你自己的介绍 -->
+          <h1>关于</h1>
+
+          <div class="prose">
+            <p>
+              你好，我是阿舟。白天写代码，晚上写点字。
+              这个博客叫「拾光」，意思是把散落的时间捡起来，放在一个能找得到的地方。
+            </p>
+
+            <p>
+              我在这里写三类东西：<strong>想清楚的事</strong>（随笔）、
+              <strong>做出来的东西</strong>（技术笔记）、
+              以及<strong>读进去的东西</strong>（读书笔记）。
+              不追热点，不保证频率，只保证每篇都是我自己写的。
+            </p>
+
+            <h2>联系我</h2>
+
+            <ul>
+              <li>邮箱：<a href="mailto:you@example.com">you@example.com</a></li>
+              <li>GitHub：<a href="https://github.com/" rel="noopener">@yourname</a></li>
+            </ul>
+
+            <h2>关于这个站</h2>
+
+            <p>
+              纯手写的静态站点，没有框架、没有数据库、没有访问统计。
+              样式全部在一个 CSS 文件里，颜色由几行 CSS 变量控制。
+              想了解细节可以看<a href="posts/static-blog.html">这篇文章</a>。
+            </p>
+
+            <hr />
+
+            <p style="color: var(--muted); font-size: 0.9375rem">
+              本站文字采用 CC BY-NC-SA 4.0 许可，转载请注明出处。
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <span>© 2026 阿舟</span>
+        <span>用 HTML 和 CSS 手写的静态站</span>
+      </div>
+    </footer>
+
+    <script src="assets/app.js"></script>
+  </body>
+</html>

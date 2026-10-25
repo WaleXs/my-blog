@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# 部署后可以在这里加上你的 sitemap 地址
+# Sitemap: https://your-domain.com/sitemap.xml

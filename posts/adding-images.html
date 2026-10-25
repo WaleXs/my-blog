@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>在文章里放图片：四种排版和一个点击放大 · 拾光</title>
+    <meta name="description" content="单图、通栏大图、并排组图、封面图——复制代码就能用，还带点击放大看原图。" />
+    <meta name="theme-color" content="#fbf9f5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#161513" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="在文章里放图片：四种排版和一个点击放大" />
+    <meta property="og:description" content="复制代码就能用的图片排版。" />
+    <meta property="og:image" content="../assets/images/example-cover.jpg" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("shiguang-theme");
+          if (t === "light" || t === "dark") {
+            document.documentElement.setAttribute("data-theme", t);
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="../assets/style.css" />
+  </head>
+
+  <body>
+    <a class="skip" href="#main">跳到正文</a>
+    <div class="progress" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="../index.html">拾光</a>
+        <nav class="site-nav" aria-label="主导航">
+          <a href="../index.html">文章</a>
+          <a href="../about.html">关于</a>
+          <button class="theme-toggle" type="button" aria-label="切换深浅色">☾</button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <article class="article">
+        <div class="wrap">
+          <a class="back" href="../index.html">← 返回文章列表</a>
+
+          <header>
+            <div class="post-meta">
+              <time datetime="2026-10-26">2026 年 10 月 26 日</time>
+              <span class="dot">·</span>
+              <span>指南</span>
+              <span class="dot">·</span>
+              <span>6 分钟</span>
+            </div>
+            <h1>在文章里放图片：四种排版和一个点击放大</h1>
+          </header>
+
+          <!-- ① 文章封面：放在 header 之后、正文之前 -->
+          <figure class="cover">
+            <img
+              src="../assets/images/example-cover.jpg"
+              width="1600"
+              height="700"
+              alt="示意图：暖色渐变中层层叠叠的沙丘剪影"
+            />
+            <figcaption>封面图会按 16:7 自动裁切，适合放在标题下面</figcaption>
+          </figure>
+
+          <div class="prose">
+            <p>
+              所有图片都放在 <code>assets/images/</code> 目录里，正文用相对路径
+              <code>../assets/images/文件名.jpg</code> 引用。下面四种排版复制代码就能用，
+              配图都是生成出来的示意图，你可以直接删掉换成自己的照片。
+            </p>
+
+            <h2>一、普通单图：和正文同宽</h2>
+
+            <p>最常用的一种。宽度自动跟着正文走，手机上也是满宽，不会溢出。</p>
+
+            <figure>
+              <img
+                src="../assets/images/example-inline.jpg"
+                width="1200"
+                height="800"
+                alt="示意图：远山日落，暖橘色天空"
+              />
+              <figcaption>图注写在 figcaption 里，会居中、变小、变灰</figcaption>
+            </figure>
+
+            <pre><code>&lt;figure&gt;
+  &lt;img src="../assets/images/example-inline.jpg"
+       width="1200" height="800"
+       alt="这里写图片内容的描述"&gt;
+  &lt;figcaption&gt;图片下方的小字说明&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+
+            <p>
+              <code>width</code> 和 <code>height</code> 一定要填成图片的真实像素尺寸。
+              浏览器据此提前留出高度，图片加载时页面不会跳一下——这个细节在手机流量下特别重要。
+            </p>
+
+            <h2>二、通栏大图：在宽屏上撑出正文</h2>
+
+            <p>
+              风景照、截图这类需要看细节的图，加上 <code>class="wide"</code> 就会在宽屏上
+              突破正文栏宽，向两侧展开。手机上仍然保持满宽。
+            </p>
+
+            <figure class="wide">
+              <img
+                src="../assets/images/example-wide.jpg"
+                width="1600"
+                height="900"
+                alt="示意图：湖面日落，太阳在水面拉出一条反光"
+              />
+              <figcaption>通栏大图：宽屏上比正文宽，手机上自动收回</figcaption>
+            </figure>
+
+            <pre><code>&lt;figure class="wide"&gt;
+  &lt;img src="../assets/images/example-wide.jpg"
+       width="1600" height="900" alt="……"&gt;
+  &lt;figcaption&gt;通栏大图&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+
+            <h2>三、并排组图：两张或三张一起看</h2>
+
+            <p>
+              用 <code>class="gallery"</code> 把多张图塞进同一个 figure，它们会自动排成一行；
+              屏幕不够宽就自动折行，不用你管。
+            </p>
+
+            <figure class="gallery">
+              <img
+                src="../assets/images/example-square-1.jpg"
+                width="900"
+                height="900"
+                alt="示意图：暖橙色渐变，带颗粒感的方形色块"
+              />
+              <img
+                src="../assets/images/example-square-2.jpg"
+                width="900"
+                height="900"
+                alt="示意图：灰米色渐变，带颗粒感的方形色块"
+              />
+              <figcaption>左：暖色；右：灰调。两张都会被裁成正方形</figcaption>
+            </figure>
+
+            <pre><code>&lt;figure class="gallery"&gt;
+  &lt;img src="../assets/images/a.jpg" width="900" height="900" alt="……"&gt;
+  &lt;img src="../assets/images/b.jpg" width="900" height="900" alt="……"&gt;
+  &lt;figcaption&gt;左：…… 右：……&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+
+            <p>
+              组图里的图片会被裁成正方形（<code>object-fit: cover</code>），
+              所以原图最好本来就是方的，或者主体在中间，不然会被切掉边缘。
+            </p>
+
+            <h2>四、点击放大看原图</h2>
+
+            <p>
+              正文图片和封面图<strong>默认都可以点开放大</strong>，按 <kbd>Esc</kbd>
+              或点一下背景就关掉，手机上也能用。不用写任何代码。
+            </p>
+
+            <p>
+              如果文章列表里放的是压缩过的小图、想点开看原图，给 <code>img</code> 加一个
+              <code>data-full</code> 指向大图就行：
+            </p>
+
+            <pre><code>&lt;img src="../assets/images/小图.jpg"
+     data-full="../assets/images/原图.jpg"
+     width="800" height="600" alt="……"&gt;</code></pre>
+
+            <h2>上传前的三件事</h2>
+
+            <ul>
+              <li>
+                <strong>文件名用英文小写加连字符</strong>，比如 <code>2026-sunset-lake.jpg</code>。
+                中文名和空格在有些服务器上会变成乱码或直接 404。
+              </li>
+              <li>
+                <strong>先压缩再上传</strong>，宽度 1600px、单张 300KB 以内就够了。
+                用 <a href="https://squoosh.app" rel="noopener">Squoosh</a> 或
+                <a href="https://tinypng.com" rel="noopener">TinyPNG</a> 拖一下即可，
+                不压缩的话几张手机照片就能让页面慢到没人愿意等。
+              </li>
+              <li>
+                <strong><code>alt</code> 一定要写</strong>。它是图片加载失败时的替代文字，
+                也是读屏软件唯一能读到的东西。
+              </li>
+            </ul>
+
+            <h2>完整模板</h2>
+
+            <p>把下面这段复制进文章，改掉路径和文字就是一个带图段落：</p>
+
+            <pre><code>&lt;figure&gt;
+  &lt;img src="../assets/images/你的图片.jpg"
+       width="1200" height="800"
+       alt="一句话描述图片内容"&gt;
+  &lt;figcaption&gt;图注（可以省略）&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+
+            <p>
+              图片是博客里最容易让页面变慢的东西，也是最值得花五分钟处理的。
+              压缩、命名、写 alt，就这三步。
+            </p>
+          </div>
+
+          <footer class="article-footer">
+            <p>这篇是功能说明兼示范，图片是生成的示例图，可以整篇删掉。</p>
+            <p><a href="../index.html">← 回到全部文章</a></p>
+          </footer>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <span>© 2026 阿舟</span>
+        <span>用 HTML 和 CSS 手写的静态站</span>
+      </div>
+    </footer>
+
+    <script src="../assets/app.js"></script>
+  </body>
+</html>

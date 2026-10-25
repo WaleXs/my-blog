@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>拾光 · 阿舟的博客</title>
+    <meta name="description" content="记录写作、阅读与造东西的过程。一个安静的个人博客。" />
+    <meta name="author" content="阿舟" />
+    <meta name="theme-color" content="#fbf9f5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#161513" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+    <!-- 社交分享卡片（部署后把 URL 换成你的真实网址） -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="拾光 · 阿舟的博客" />
+    <meta property="og:description" content="记录写作、阅读与造东西的过程。" />
+    <meta property="og:site_name" content="拾光" />
+
+    <!-- 在 CSS 之前先定主题，避免深色模式下闪白 -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("shiguang-theme");
+          if (t === "light" || t === "dark") {
+            document.documentElement.setAttribute("data-theme", t);
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+
+  <body>
+    <a class="skip" href="#main">跳到正文</a>
+
+    <header class="site-header">
+      <div class="wrap">
+        <!-- ✏️ 改成你的站名 -->
+        <a class="brand" href="index.html">拾光</a>
+        <nav class="site-nav" aria-label="主导航">
+          <a href="index.html" aria-current="page">文章</a>
+          <a href="about.html">关于</a>
+          <button class="theme-toggle" type="button" aria-label="切换深浅色">☾</button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="wrap">
+        <section class="hero">
+          <p class="eyebrow">你好，我是</p>
+          <!-- ✏️ 改成你的名字和一句话介绍 -->
+          <h1>阿舟</h1>
+          <p class="lede">
+            在这里记录写作、阅读，以及把想法变成东西的过程。慢一点写，认真一点。
+          </p>
+          <ul class="hero-links">
+            <li><a href="about.html">关于我</a></li>
+            <li><a href="mailto:you@example.com">邮箱</a></li>
+            <li><a href="https://github.com/" rel="noopener">GitHub</a></li>
+            <li><a href="#" rel="noopener">RSS</a></li>
+          </ul>
+        </section>
+
+        <h2 class="section-title">最新文章</h2>
+
+        <ul class="post-list">
+          <li class="post-item">
+            <a class="post-link" href="posts/adding-images.html">
+              <div class="post-meta">
+                <time datetime="2026-10-26">2026 年 10 月 26 日</time>
+                <span class="dot">·</span>
+                <span>6 分钟</span>
+              </div>
+              <h3 class="post-title">在文章里放图片：四种排版和一个点击放大</h3>
+              <p class="post-excerpt">
+                单图、通栏大图、并排组图、封面图——复制代码就能用，点一下还能看原图。
+              </p>
+              <span class="tag">指南</span>
+            </a>
+          </li>
+
+          <li class="post-item">
+            <a class="post-link" href="posts/hello-world.html">
+              <div class="post-meta">
+                <time datetime="2026-10-21">2026 年 10 月 21 日</time>
+                <span class="dot">·</span>
+                <span>4 分钟</span>
+              </div>
+              <h3 class="post-title">写博客这件事，为什么值得重新开始一次</h3>
+              <p class="post-excerpt">
+                社交平台上的发言像扔进河里的石子，写完就沉了。博客不一样：它是自己的地，可以慢慢收拾。
+              </p>
+              <span class="tag">随笔</span>
+            </a>
+          </li>
+
+          <li class="post-item">
+            <a class="post-link" href="posts/static-blog.html">
+              <div class="post-meta">
+                <time datetime="2026-10-05">2026 年 10 月 5 日</time>
+                <span class="dot">·</span>
+                <span>8 分钟</span>
+              </div>
+              <h3 class="post-title">零依赖静态博客：这个站是怎么搭起来的</h3>
+              <p class="post-excerpt">
+                三个 HTML 页面、一个 CSS 文件、一个 60 行的 JS，没有任何构建步骤。上传就是发布。
+              </p>
+              <span class="tag">技术</span>
+            </a>
+          </li>
+
+          <li class="post-item">
+            <a class="post-link" href="posts/reading-2026.html">
+              <div class="post-meta">
+                <time datetime="2026-09-12">2026 年 9 月 12 日</time>
+                <span class="dot">·</span>
+                <span>5 分钟</span>
+              </div>
+              <h3 class="post-title">今年读过的几本书，和一些没读完的</h3>
+              <p class="post-excerpt">
+                读完的未必好，没读完的未必差。记下几本真的让我停下来想了很久的。
+              </p>
+              <span class="tag">阅读</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <span>© <span id="year">2026</span> 阿舟</span>
+        <span>用 HTML 和 CSS 手写的静态站</span>
+      </div>
+    </footer>
+
+    <script src="assets/app.js"></script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
